@@ -11,7 +11,7 @@ Description:         将风玫瑰图添加到地图中；
 Usage:               
 """
 # -------------------------------------------
-from PIL import Image, ImageDraw, ImageFont, ImageGrab
+from PIL import Image
 
 # Get map size
 #   map_x: map image X
@@ -35,15 +35,13 @@ w_d_y = windrose.size[1]
 
 x_topleft = map_x - offset_x - w_d_x
 y_topleft = offset_y
-
 x_bottomright = map_x - offset_x
 y_bottomright = offset_y + w_d_y
-
 box=(x_topleft, y_topleft, x_bottomright, y_bottomright)
-print(box)
+
 
 # 使用透明图层为掩膜裁剪出目标区域。
 clip_mask = windrose.convert('RGBA')
 we_map.paste(windrose, box, clip_mask)
-# we_map.save("test.png")
-we_map.show()
+we_map.save("test.jpg")
+# we_map.show()
