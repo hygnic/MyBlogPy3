@@ -10,11 +10,10 @@ Description:
 Usage:               
 """
 # -------------------------------------------
-# print(ord("文"))
-# 可能原因：管理员运行 Pycharm 试试
-# 将miniconda 只装到个人用户下
+# G:\MoveOn\MyBlogPy3\Hygnic_RVT\example1.py
 
 """--------IMPORT_SETTINGS"""
+
 
 import sys
 import os
@@ -34,7 +33,8 @@ print(">>"*50)
 
 
 """--------DATA"""
-filepath = r"D:\MyProject\BaiduNetdiskWorkspace\1.Blog\7_可视化\RRIM系列作品\3_剑门关\1_栅格和地图文档"
+# filepath = r"D:\MyProject\BaiduNetdiskWorkspace\1.Blog\7_可视化\RRIM系列作品\3_剑门关\1_栅格和地图文档"
+filepath = r"E:\MyD\BaiduNetdiskWorkspace\1.Blog\7_可视化\rrim系列作品\3_剑门关\1_栅格和地图文档"
 filename = os.path.join(filepath, "SRTMv3_1_N32E105.tif")
 output_raster = os.path.join(filepath, "After_p.tif")
 os.chdir(filepath)
