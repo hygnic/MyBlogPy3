@@ -10,7 +10,7 @@ Description:
 Usage:               
 """
 # -------------------------------------------
-# G:\MoveOn\MyBlogPy3\Hygnic_RVT\example1.py
+# G:\MoveOn\MyBlogPy3\Hygnic_RVT\create_SVF.py
 
 """--------IMPORT_SETTINGS"""
 
@@ -33,27 +33,29 @@ print(">>"*50)
 
 
 """--------DATA"""
-# filepath = r"D:\MyProject\BaiduNetdiskWorkspace\1.Blog\7_可视化\RRIM系列作品\3_剑门关\1_栅格和地图文档"
-# filepath = r"E:\MyD\BaiduNetdiskWorkspace\1.Blog\7_可视化\rrim系列作品\3_剑门关\1_栅格和地图文档"
-filepath = r"E:\MyD\BaiduNetdiskWorkspace\1.Blog\7_可视化\rrim系列作品\1_长白山"
-# filename = os.path.join(filepath, "SRTMv3_1_N32E105.tif")
-filename = os.path.join(filepath, "Mt_ChangBai_4522.tif")
-output_raster = os.path.join(filepath, "After_p.tif")
+# filepath = r"E:\MyD\BaiduNetdiskWorkspace\1.Blog\7_可视化\rrim系列作品\4_梵净山\1_data"
+filepath = r"E:\MyD\BaiduNetdiskWorkspace\1.Blog\7_可视化\rrim系列作品\5_梅里雪山\1_data"
+filename = os.path.join(filepath, "SRTMv3_1_N28E098.tif")
+# filename = os.path.join(filepath, "SRTMv3_1_N27E108.tif")
+output_raster = os.path.join(filepath, "projected.tif")
 os.chdir(filepath)
 
 
-# """--------REPROJ"""
-# input_raster = gdal.Open(filename)
-# warp = gdal.Warp(output_raster,input_raster,dstSRS='EPSG:4544',resampleAlg="cubic")
-# input_raster = None # Closes the files
-#
-# # CGCS2000_3_Degree_GK_CM_105E
-# # WKID: 4544 权限: EPSG
+"""--------REPROJ"""
+input_raster = gdal.Open(filename)
+warp = gdal.Warp(output_raster,input_raster,dstSRS='EPSG:4542',resampleAlg="cubic")
+input_raster = None # Closes the files
+
+# CGCS2000_3_Degree_GK_CM_105E
+# WKID: 4544 权限: EPSG
+
+# CGCS2000 / 3-degree Gauss-Kruger CM 99E
+# 4542
 
 
 """--------RASTER_INFO"""
-dem_dataset = filename
-# dem_dataset = output_raster # 如果需要投影时开启
+# dem_dataset = filename
+dem_dataset = output_raster # 如果需要投影时开启
 dem_dict = rvt.default.get_raster_arr(dem_dataset)
 dem_arr = dem_dict["array"]  # numpy array of DEM
 dem_resolution = dem_dict["resolution"]
@@ -112,33 +114,42 @@ svf_noise = 3  # level of noise remove (0-don't remove, 1-low, 2-med, 3-high)
 dict_svf = rvt.vis.sky_view_factor(
     dem=dem_arr, resolution=dem_res_x,
     compute_svf=True, compute_asvf=False,
-    compute_opns=True,svf_n_dir=svf_n_dir,
+    compute_opns=False,svf_n_dir=svf_n_dir,
     svf_r_max=svf_r_max, svf_noise=svf_noise)
 
-opns_arr = dict_svf["svf"]
-SVF_arr = dict_svf["opns"]
-opns_arr_name = "Positive_openness.tif"
-svf_arr_name = "SVF.tif"
-rvt.default.save_raster(src_raster_path=dem_dataset, out_raster_path=opns_arr_name, out_raster_arr=opns_arr,
-                        e_type=6)
+SVF_arr = dict_svf["svf"]
+svf_arr_name = "SVF_denoise3.tif"
 rvt.default.save_raster(src_raster_path=dem_dataset, out_raster_path=svf_arr_name, out_raster_arr=SVF_arr,
                         e_type=6)
 
-print("Positive_openness Exported")
+print("SVF_3 Exported")
 
-
-"""--------Negative_openness"""
-dem_arr_neg_opns = dem_arr * -1  # dem * -1 for neg opns
-# we don't need to calculate svf and asvf (compute_svf=False, compute_asvf=False)
+svf_noise = 1  # level of noise remove (0-don't remove, 1-low, 2-med, 3-high)
 dict_svf = rvt.vis.sky_view_factor(
-    dem=dem_arr_neg_opns, resolution=dem_res_x,
-    compute_svf=False, compute_asvf=False,
-    compute_opns=True,svf_n_dir=svf_n_dir,
+    dem=dem_arr, resolution=dem_res_x,
+    compute_svf=True, compute_asvf=False,
+    compute_opns=False,svf_n_dir=svf_n_dir,
     svf_r_max=svf_r_max, svf_noise=svf_noise)
 
-neg_opns_arr = dict_svf["opns"]
-neg_opns_arr_path = "Negative_openness.tif"
-
-rvt.default.save_raster(src_raster_path=dem_dataset, out_raster_path=neg_opns_arr_path, out_raster_arr=neg_opns_arr,
+SVF_arr = dict_svf["svf"]
+svf_arr_name = "SVF_denoise1.tif"
+rvt.default.save_raster(src_raster_path=dem_dataset, out_raster_path=svf_arr_name, out_raster_arr=SVF_arr,
                         e_type=6)
-print("Negative_openness Exported")
+print("SVF_1 Exported")
+
+
+# """--------Negative_openness"""
+# dem_arr_neg_opns = dem_arr * -1  # dem * -1 for neg opns
+# # we don't need to calculate svf and asvf (compute_svf=False, compute_asvf=False)
+# dict_svf = rvt.vis.sky_view_factor(
+#     dem=dem_arr_neg_opns, resolution=dem_res_x,
+#     compute_svf=False, compute_asvf=False,
+#     compute_opns=True,svf_n_dir=svf_n_dir,
+#     svf_r_max=svf_r_max, svf_noise=svf_noise)
+#
+# neg_opns_arr = dict_svf["opns"]
+# neg_opns_arr_path = "Negative_openness.tif"
+#
+# rvt.default.save_raster(src_raster_path=dem_dataset, out_raster_path=neg_opns_arr_path, out_raster_arr=neg_opns_arr,
+#                         e_type=6)
+# print("Negative_openness Exported")
