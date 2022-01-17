@@ -66,7 +66,7 @@ print("Hillshade Exported")
 
 
 """--------Multiple directions hillshade"""
-nr_directions = 4  # Number of solar azimuth angles (clockwise from North) (number of directions, number of bands)
+nr_directions = 16  # Number of solar azimuth angles (clockwise from North) (number of directions, number of bands)
 sun_elevation = 45  # Solar vertical angle (above the horizon) in degrees
 multi_hillshade_arr = rvt.vis.multi_hillshade(
     dem=dem_arr, resolution_x=dem_res_x,
