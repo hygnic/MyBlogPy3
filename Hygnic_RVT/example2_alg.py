@@ -4,9 +4,9 @@
 # Author:            Hygnic
 # Created on:        2022/1/7 10:15
 # Version:           
-# Reference:         
+# Reference:
 """
-Description:         
+Description:         结合 oppn 和 neg 栅格制作 Ridge Valley Index
 Usage:               
 """
 # -------------------------------------------

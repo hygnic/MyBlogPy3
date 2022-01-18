@@ -6,7 +6,8 @@
 # Version:           
 # Reference:         
 """
-Description:         
+Description:         使用 RVT 库生成 hillshade\slope\SVF
+等产品
 Usage:               
 """
 # -------------------------------------------
