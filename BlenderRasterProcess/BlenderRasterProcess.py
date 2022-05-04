@@ -13,12 +13,13 @@ Usage:
 """
 # -------------------------------------------
 import arcpy
-import numpy as np
 from pprint import pprint
 
-raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\3_长白山附近\2_Blender渲染\1Data\scene2.tif"
-new_raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\3_长白山附近\2_Blender渲染\1Data"
-new_raster_name = r"new_raster.tif"
+# raster_path = r"C:\Users\Administrator\Documents\同步空间\3_RasterData\SRTM30-90\GanZi\MinyaKonka\1RawData\Merged.tif"
+# new_raster_path = r"C:\Users\Administrator\Documents\同步空间\3_RasterData\SRTM30-90\GanZi\MinyaKonka\2ProcessedData"
+raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\3.NEW长白山\1.DataANDMap\scene2.tif"
+new_raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\3.NEW长白山\1.DataANDMap"
+new_raster_name = r"RescaleMerged_30.tif"
 
 # Useful Para
 raster_file = arcpy.Raster(raster_path)
