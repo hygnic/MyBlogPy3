@@ -17,8 +17,15 @@ from pprint import pprint
 
 # raster_path = r"C:\Users\Administrator\Documents\同步空间\3_RasterData\SRTM30-90\GanZi\MinyaKonka\1RawData\Merged.tif"
 # new_raster_path = r"C:\Users\Administrator\Documents\同步空间\3_RasterData\SRTM30-90\GanZi\MinyaKonka\2ProcessedData"
-raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\3.NEW长白山\1.DataANDMap\scene2.tif"
-new_raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\3.NEW长白山\1.DataANDMap"
+# raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\3.NEW长白山\1.DataANDMap\scene2.tif"
+# new_raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\3.NEW长白山\1.DataANDMap"
+
+# raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\00.Blender渲染中国包括周边地图\1.Data\DEMWithAllPositive.tif"
+# new_raster_path = r"C:\Users\Administrator\Documents\同步空间\1.Blog\2.MapMake\00.Blender渲染中国包括周边地图\1.Data"
+# new_raster_name = r"RescaleMerged_30.tif"
+
+raster_path = r"C:\Users\Administrator\Documents\同步空间\3_RasterData\1.GDBS\阿尔康\Raster\mergeProjectedCliped.tif"
+new_raster_path = r"C:\Users\Administrator\Documents"
 new_raster_name = r"RescaleMerged_30.tif"
 
 # Useful Para
@@ -57,6 +64,10 @@ arcpy.MosaicToNewRaster_management(new_raster, new_raster_path,
                                    new_raster_name,
                                    pixel_type="16_BIT_UNSIGNED",
                                    number_of_bands=1)
+# import os
+# arcpy.CopyRaster_management(new_raster, os.path.join(new_raster_path, new_raster_name),
+#
+#                                    pixel_type="16_BIT_UNSIGNED")
 
 # cellsize=int(cell_h),
 
